@@ -4,7 +4,12 @@ import asyncio
 import os
 from typing import Any
 
-from authplane_mcp import authplane_mcp_auth, require_scope
+from authplane import InboundDPoPOptions
+from authplane_mcp import (
+    authplane_mcp_auth,
+    install_request_context,
+    require_scope,
+)
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
@@ -43,6 +48,7 @@ async def main() -> None:
         resource=MCP_RESOURCE_URI,
         scopes=SUPPORTED_SCOPES,
         dev_mode=True,
+        inbound_dpop=InboundDPoPOptions(required=True),
     )
 
     mcp = FastMCP(
@@ -51,6 +57,8 @@ async def main() -> None:
         json_response=True,
         **auth_result,
     )
+
+    install_request_context(mcp)
 
     github = GitHubClient()
 
