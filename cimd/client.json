@@ -1,0 +1,14 @@
+{
+  "client_id": "http://host.docker.internal:7002/client.json",
+  "client_name": "GitHub MCP CIMD Client",
+  "redirect_uris": [
+    "http://localhost:7001/callback"
+  ],
+  "grant_types": [
+    "authorization_code"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "token_endpoint_auth_method": "none"
+}
